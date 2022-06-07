@@ -1,0 +1,4 @@
+/node_modules
+/admin_contents
+.env
+.DS_Store
