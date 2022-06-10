@@ -33,6 +33,7 @@ function avatarUpdate(request, response) {
   pool.query(text, values).then(() => {
     response.json({
       success: true,
+      image: request.imageUrl,
     });
   });
 }
