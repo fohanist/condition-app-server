@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require("uuid");
 const moment = require("moment");
 require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");
-const nowDate = moment().format("YYYY-MM-DDTHH:mm:ss");
+const getTimeNow = () => moment().format("YYYY-MM-DDTHH:mm:ss");
 
 function createPw(password) {
   return new Promise((resolve, reject) => {
@@ -61,7 +61,7 @@ function Join(request, response) {
       avatar_url,
       create_date,
       update_date
-    ) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8)
+    ) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9)
 `;
     const values = [
       request.body.userName,
@@ -71,8 +71,8 @@ function Join(request, response) {
       uuidv4(),
       "앱 둘러보는",
       "https://res.cloudinary.com/dvxc4t4yt/image/upload/v1654587329/condition-app/default_eqds9t.png",
-      nowDate,
-      nowDate,
+      getTimeNow(),
+      getTimeNow(),
     ];
 
     pool

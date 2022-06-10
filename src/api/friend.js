@@ -5,7 +5,7 @@ const verifyToken = require("../middleware/verifyToken");
 const moment = require("moment");
 require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");
-const nowDate = moment().format("YYYY-MM-DDTHH:mm:ss");
+const getTimeNow = () => moment().format("YYYY-MM-DDTHH:mm:ss");
 
 function addFriend(request, response) {
   const userData = request.userTokenInfo;
@@ -36,12 +36,12 @@ function addFriend(request, response) {
       const call1 = pool.query(text3, [
         request.friendInfo.userFrom,
         request.friendInfo.userTo,
-        nowDate,
+        getTimeNow(),
       ]);
       const call2 = pool.query(text3, [
         request.friendInfo.userTo,
         request.friendInfo.userFrom,
-        nowDate,
+        getTimeNow(),
       ]);
       return Promise.all([call1, call2]);
     })

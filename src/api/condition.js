@@ -5,14 +5,14 @@ const verifyToken = require("../middleware/verifyToken");
 const moment = require("moment");
 require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");
-const nowDate = moment().format("YYYY-MM-DDTHH:mm:ss");
+const getTimeNow = () => moment().format("YYYY-MM-DDTHH:mm:ss");
 
 function conditionUpdate(request, response) {
   const userData = request.userTokenInfo;
   const text = `UPDATE users SET condition = $1, update_date = $2 WHERE user_id = $3`;
   const text2 = `INSERT INTO condition_log (user_from, condition, create_date) VALUES ($1, $2, $3)`;
-  const values = [request.body.myCondition, nowDate, userData.userId];
-  const values2 = [userData.userId, request.body.myCondition, nowDate];
+  const values = [request.body.myCondition, getTimeNow(), userData.userId];
+  const values2 = [userData.userId, request.body.myCondition, getTimeNow()];
 
   const call1 = pool.query(text, values);
   const call2 = pool.query(text2, values2);
@@ -64,12 +64,12 @@ function getCondition(request, response) {
       return Promise.all([myLogs, ...logList]);
     })
     .then((res) => {
-      // 모든 데이터 합쳐서 가공하기
+      //모든 데이터 합쳐서 가공하기
       let result = [];
       for (const item of res) {
         result.push(...item.rows);
       }
-      // 시간 순서대로 정렬
+      //시간 순서대로 정렬
       result = result.sort(
         (a, b) => new Date(b.update_date) - new Date(a.update_date)
       );
