@@ -71,12 +71,12 @@ function getCondition(request, response) {
       }
       //시간 순서대로 정렬
       result = result.sort((a, b) => {
-        return new Date(b.update_date) - new Date(a.update_date);
+        return new Date(b.create_date) - new Date(a.create_date);
       });
       result = result.map((item) => {
         return {
           ...item,
-          update_date: item.update_date.toString(),
+          update_date: item.create_date.toString(),
         };
       });
       response.json({
