@@ -9,12 +9,12 @@ require("dotenv").config();
 app.use(cors());
 app.use(
   express.json({
-    limit: "5mb",
+    limit: "500mb",
   })
 );
 app.use(
   express.urlencoded({
-    limit: "5mb",
+    limit: "500mb",
     extended: false,
   })
 );
@@ -26,7 +26,7 @@ app.get("/", (_, response) => {
 
 app.use("/", router);
 app.use(morgan("dev"));
-app.set("port", 3002);
+app.set("port", 3200);
 
 app.listen(app.get("port"), () => {
   console.log(`Server Open: http://localhost:${app.get("port")}`.magenta);

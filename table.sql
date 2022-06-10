@@ -7,20 +7,20 @@ CREATE TABLE users (
     user_code VARCHAR(50) UNIQUE NOT NULL,
     condition VARCHAR(30) NOT NULL,
     avatar_url TEXT,
-    create_date TIMESTAMP NOT NULL,
-    update_date TIMESTAMP NOT NULL
+    create_date TIMESTAMPTZ NOT NULL,
+    update_date TIMESTAMPTZ NOT NULL
 );
 
 CREATE TABLE friends (
     id SERIAL PRIMARY KEY,
     user_from INTEGER NOT NULL,
     user_to INTEGER NOT NULL,
-    create_date TIMESTAMP NOT NULL
+    create_date TIMESTAMPTZ NOT NULL
 );
 
 CREATE TABLE condition_log (
     id SERIAL PRIMARY KEY,
     user_from INTEGER NOT NULL,
     condition VARCHAR(30) NOT NULL,
-    create_date TIMESTAMP NOT NULL
+    create_date TIMESTAMPTZ NOT NULL
 );

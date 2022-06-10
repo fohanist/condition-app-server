@@ -72,6 +72,13 @@ function getFriends(request, response) {
   const values = [userData.userId];
 
   pool.query(text, values).then((res) => {
+    let result = res.rows;
+    result = result.map((item) => {
+      return {
+        ...item,
+        update_date: item.update_date.toString(),
+      };
+    });
     response.json({
       success: true,
       data: res.rows,

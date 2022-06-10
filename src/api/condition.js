@@ -70,9 +70,15 @@ function getCondition(request, response) {
         result.push(...item.rows);
       }
       //시간 순서대로 정렬
-      result = result.sort(
-        (a, b) => new Date(b.update_date) - new Date(a.update_date)
-      );
+      result = result.sort((a, b) => {
+        return new Date(b.update_date) - new Date(a.update_date);
+      });
+      result = result.map((item) => {
+        return {
+          ...item,
+          update_date: item.update_date.toString(),
+        };
+      });
       response.json({
         success: true,
         data: result,
