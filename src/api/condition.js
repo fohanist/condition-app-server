@@ -35,7 +35,7 @@ function getCondition(request, response) {
     INNER JOIN users ON users.user_id = select_user.user_to;
   `;
   const getConditionQuery = `
-    SELECT users.user_name, condition_select.condition, users.avatar_url, users.update_date
+    SELECT users.user_name, condition_select.condition, users.avatar_url, condition_select.create_date
     FROM (SELECT * FROM condition_log WHERE user_from = $1) as condition_select
     INNER JOIN users ON users.user_id = condition_select.user_from;  
   `;
