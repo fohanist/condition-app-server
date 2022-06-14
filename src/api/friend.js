@@ -81,7 +81,7 @@ function getFriends(request, response) {
     });
     response.json({
       success: true,
-      data: res.rows,
+      data: result,
     });
   });
 }
